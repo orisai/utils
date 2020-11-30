@@ -1,0 +1,60 @@
+# Utils
+
+Utility classes used across Orisai libraries
+
+## Content
+
+- [Optional dependencies](#optional-dependencies)
+    - [Optional extension](#optional-extension)
+    - [Optional package](#optional-package)
+
+## Optional dependencies
+
+Sometimes it's useful to have dependency required only by specific class, method or function.
+In that case we should check whether the dependency is installed.
+
+### Optional extension
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+use Orisai\Utils\Dependencies\ExtensionRequired;
+
+$missing = Dependencies::getNotLoadedExtensions(['json', 'curl']);
+
+if ($missing !== []) {
+	throw ExtensionRequired::forClass($missing, static::class);
+	throw ExtensionRequired::forMethod($missing, static::class, __FUNCTION__);
+	throw ExtensionRequired::forFunction($missing,  __FUNCTION__);
+}
+```
+
+### Optional package
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+use Orisai\Utils\Dependencies\PackageRequired;
+
+$missing = Dependencies::getNotLoadedPackages(['example/package1', 'example/package2']);
+
+if ($missing !== []) {
+	throw PackageRequired::forClass($missing, static::class);
+	throw PackageRequired::forMethod($missing, static::class, __FUNCTION__);
+	throw PackageRequired::forFunction($missing, __FUNCTION__);
+}
+```
+
+If the class extends class, implements interface or uses trait from an optional package then exception must be thrown
+before class is defined. Otherwise php fatal error is thrown.
+
+```php
+use Orisai\Utils\Dependencies\PackageRequired;
+
+if (!class_exists(ClassFromOptionalDependency::class)) {
+	throw PackageRequired::forUndefinedClass(['example/package'], Example::class, __FILE__);
+}
+
+class Example extends ClassFromOptionalDependency
+{
+
+}
+```
