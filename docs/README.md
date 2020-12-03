@@ -7,6 +7,8 @@ Utility classes used across Orisai libraries
 - [Optional dependencies](#optional-dependencies)
     - [Optional extension](#optional-extension)
     - [Optional package](#optional-package)
+- [Arrays](#arrays)
+    - [Merge arrays](#merge-arrays)
 
 ## Optional dependencies
 
@@ -57,4 +59,45 @@ class Example extends ClassFromOptionalDependency
 {
 
 }
+```
+
+## Arrays
+
+### Merge arrays
+
+```php
+use Orisai\Utils\Arrays\ArrayMerger;
+
+$default = [
+	'default' => 'default',
+	'overridden' => 'not-overridden',
+	'merged' => [
+		'foo' => 'not-overridden',
+		'bar' => 'not-overridden',
+		'baz' => 'not-overridden',
+	],
+];
+
+$toMerge = [
+	'overridden' => 'overridden',
+	'new' => 'new',
+	'merged' => [
+		'baz' => 'overridden',
+	],
+];
+
+$result = ArrayMerger::merge($default, $toMerge);
+
+$expected = [
+	'default' => 'default',
+	'overridden' => 'overridden',
+	'merged' => [
+		'foo' => 'not-overridden',
+		'bar' => 'not-overridden',
+		'baz' => 'overridden',
+	],
+	'new' => 'new',
+];
+
+assert($result === $expected);
 ```
