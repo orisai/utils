@@ -2,7 +2,7 @@
 
 namespace Tests\Orisai\Utils\Unit\Dependencies;
 
-use Orisai\Utils\Dependencies\PackageRequired;
+use Orisai\Utils\Dependencies\Exception\PackageRequired;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Tests\Orisai\Utils\Doubles\TestClass;

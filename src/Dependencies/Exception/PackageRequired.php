@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Orisai\Utils\Dependencies;
+namespace Orisai\Utils\Dependencies\Exception;
 
 use Orisai\Exceptions\LogicalException;
 use Orisai\Exceptions\Message;
