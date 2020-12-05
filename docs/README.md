@@ -19,7 +19,7 @@ In that case we should check whether the dependency is installed.
 
 ```php
 use Orisai\Utils\Dependencies\Dependencies;
-use Orisai\Utils\Dependencies\ExtensionRequired;
+use Orisai\Utils\Dependencies\Exception\ExtensionRequired;
 
 $missing = Dependencies::getNotLoadedExtensions(['json', 'curl']);
 
@@ -34,7 +34,7 @@ if ($missing !== []) {
 
 ```php
 use Orisai\Utils\Dependencies\Dependencies;
-use Orisai\Utils\Dependencies\PackageRequired;
+use Orisai\Utils\Dependencies\Exception\PackageRequired;
 
 $missing = Dependencies::getNotLoadedPackages(['example/package1', 'example/package2']);
 
@@ -49,7 +49,7 @@ If the class extends class, implements interface or uses trait from an optional 
 before class is defined. Otherwise php fatal error is thrown.
 
 ```php
-use Orisai\Utils\Dependencies\PackageRequired;
+use Orisai\Utils\Dependencies\Exception\PackageRequired;
 
 if (!class_exists(ClassFromOptionalDependency::class)) {
 	throw PackageRequired::forUndefinedClass(['example/package'], Example::class, __FILE__);

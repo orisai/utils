@@ -7,4 +7,4 @@ parameters:
 
 	ignoreErrors:
 		- message: '#^Parameter \#1 \$json of function json_decode expects string, string\|false given\.$#'
-		  path: %currentWorkingDirectory%/src/Dependencies/PackageRequired.php
+		  path: %currentWorkingDirectory%/src/Dependencies/Exception/PackageRequired.php

@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Orisai\Utils\Unit\Dependencies;
+namespace Tests\Orisai\Utils\Unit\Dependencies\Exception;
 
-use Orisai\Utils\Dependencies\ExtensionRequired;
+use Orisai\Utils\Dependencies\Exception\ExtensionRequired;
 use PHPUnit\Framework\TestCase;
 use Tests\Orisai\Utils\Doubles\TestClass;
 
@@ -25,7 +25,7 @@ MSG);
 		$this->expectException(ExtensionRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use method
-         Tests\Orisai\Utils\Unit\Dependencies\ExtensionRequiredTest->testMethod().
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\ExtensionRequiredTest->testMethod().
 Problem: Required php extension foo is not installed.
 MSG);
 
@@ -37,7 +37,7 @@ MSG);
 		$this->expectException(ExtensionRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\ExtensionRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\ExtensionRequiredTest.
 Problem: Required php extension foo is not installed.
 MSG);
 
@@ -49,7 +49,7 @@ MSG);
 		$this->expectException(ExtensionRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\ExtensionRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\ExtensionRequiredTest.
 Problem: Required php extensions foo, bar are not installed.
 MSG);
 
