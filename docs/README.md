@@ -30,6 +30,16 @@ if ($missing !== []) {
 }
 ```
 
+You can also check whether a single extension is loaded
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+
+if (Dependencies::isExtensionLoaded('curl')) {
+	// Do something
+}
+```
+
 ### Optional package
 
 ```php
@@ -58,6 +68,16 @@ if (!class_exists(ClassFromOptionalDependency::class)) {
 class Example extends ClassFromOptionalDependency
 {
 
+}
+```
+
+You can also check whether a single package is loaded
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+
+if (Dependencies::isPackageLoaded('example/package')) {
+	// Do something
 }
 ```
 
