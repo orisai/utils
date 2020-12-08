@@ -23,6 +23,11 @@ final class Dependencies
 		return $packages;
 	}
 
+	public static function isPackageLoaded(string $package): bool
+	{
+		return InstalledVersions::isInstalled($package);
+	}
+
 	/**
 	 * @param array<string> $extensions
 	 * @return array<string>
@@ -36,6 +41,11 @@ final class Dependencies
 		}
 
 		return $extensions;
+	}
+
+	public static function isExtensionLoaded(string $extension): bool
+	{
+		return extension_loaded($extension);
 	}
 
 }
