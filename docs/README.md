@@ -7,6 +7,7 @@ Utility classes used across Orisai libraries
 - [Optional dependencies](#optional-dependencies)
     - [Optional extension](#optional-extension)
     - [Optional package](#optional-package)
+	- [Testing optionals](#testing-optionals)
 - [Arrays](#arrays)
     - [Merge arrays](#merge-arrays)
 
@@ -79,6 +80,37 @@ use Orisai\Utils\Dependencies\Dependencies;
 if (Dependencies::isPackageLoaded('example/package')) {
 	// Do something
 }
+```
+
+### Testing optionals
+
+For testing, you can emulate extension and packages are not loaded instead of having not tested code branches or complicated CI.
+
+Just make sure your optionals tests run in separate processes to prevent race conditions from parallel tests running.
+e.g. with [PHPUnit](https://github.com/sebastianbergmann/phpunit) `@runInSeparateProcess` annotation.
+
+Testing extensions:
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+use Orisai\Utils\Tester\DependenciesTester;
+
+DependenciesTester::addIgnoredExtensions(['curl']);
+
+Dependencies::getNotLoadedExtensions(['curl']); // ['curl']
+Dependencies::isExtensionLoaded('curl'); // false
+```
+
+Testing packages:
+
+```php
+use Orisai\Utils\Dependencies\Dependencies;
+use Orisai\Utils\Tester\DependenciesTester;
+
+DependenciesTester::addIgnoredPackages(['example/package']);
+
+Dependencies::getNotLoadedPackages(['example/package']); // ['example/package']
+Dependencies::isPackageLoaded('example/package'); // false
 ```
 
 ## Arrays
