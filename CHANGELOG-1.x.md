@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Optional dependencies
     - `Dependencies`
+	- `DependenciesTester`
     - `ExtensionRequired`
     - `PackageRequired`
 - Arrays

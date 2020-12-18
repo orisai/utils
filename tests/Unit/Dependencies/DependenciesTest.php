@@ -3,6 +3,7 @@
 namespace Tests\Orisai\Utils\Unit\Dependencies;
 
 use Orisai\Utils\Dependencies\Dependencies;
+use Orisai\Utils\Tester\DependenciesTester;
 use PHPUnit\Framework\TestCase;
 
 final class DependenciesTest extends TestCase
@@ -22,6 +23,20 @@ final class DependenciesTest extends TestCase
 		self::assertFalse(Dependencies::isPackageLoaded('example/package'));
 	}
 
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function testPackagesIgnored(): void
+	{
+		self::assertSame([], Dependencies::getNotLoadedPackages(['orisai/exceptions']));
+		self::assertTrue(Dependencies::isPackageLoaded('orisai/exceptions'));
+
+		DependenciesTester::addIgnoredPackages(['orisai/exceptions']);
+
+		self::assertSame(['orisai/exceptions'], Dependencies::getNotLoadedPackages(['orisai/exceptions']));
+		self::assertFalse(Dependencies::isPackageLoaded('orisai/exceptions'));
+	}
+
 	public function testExtensions(): void
 	{
 		self::assertSame(['foo', 'bar'], Dependencies::getNotLoadedExtensions(['foo', 'bar']));
@@ -31,6 +46,21 @@ final class DependenciesTest extends TestCase
 		self::assertTrue(Dependencies::isExtensionLoaded('date'));
 		self::assertFalse(Dependencies::isExtensionLoaded('foo'));
 		self::assertFalse(Dependencies::isExtensionLoaded('bar'));
+
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function testExtensionsIgnored(): void
+	{
+		self::assertSame([], Dependencies::getNotLoadedExtensions(['Core']));
+		self::assertTrue(Dependencies::isExtensionLoaded('Core'));
+
+		DependenciesTester::addIgnoredExtensions(['Core']);
+
+		self::assertSame(['Core'], Dependencies::getNotLoadedExtensions(['Core']));
+		self::assertFalse(Dependencies::isExtensionLoaded('Core'));
 	}
 
 }

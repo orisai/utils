@@ -3,6 +3,7 @@
 namespace Orisai\Utils\Dependencies;
 
 use Composer\InstalledVersions;
+use Orisai\Utils\Tester\DependenciesTester;
 use function extension_loaded;
 
 final class Dependencies
@@ -15,7 +16,7 @@ final class Dependencies
 	public static function getNotLoadedPackages(array $packages): array
 	{
 		foreach ($packages as $key => $package) {
-			if (InstalledVersions::isInstalled($package)) {
+			if (self::isPackageLoaded($package)) {
 				unset($packages[$key]);
 			}
 		}
@@ -25,7 +26,7 @@ final class Dependencies
 
 	public static function isPackageLoaded(string $package): bool
 	{
-		return InstalledVersions::isInstalled($package);
+		return InstalledVersions::isInstalled($package) && !DependenciesTester::shouldPackageBeIgnored($package);
 	}
 
 	/**
@@ -35,7 +36,7 @@ final class Dependencies
 	public static function getNotLoadedExtensions(array $extensions): array
 	{
 		foreach ($extensions as $key => $extension) {
-			if (extension_loaded($extension)) {
+			if (self::isExtensionLoaded($extension)) {
 				unset($extensions[$key]);
 			}
 		}
@@ -45,7 +46,7 @@ final class Dependencies
 
 	public static function isExtensionLoaded(string $extension): bool
 	{
-		return extension_loaded($extension);
+		return extension_loaded($extension) && !DependenciesTester::shouldExtensionBeIgnored($extension);
 	}
 
 }
