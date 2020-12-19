@@ -12,6 +12,9 @@ use function implode;
 final class ExtensionRequired extends LogicalException
 {
 
+	/** @var array<string> */
+	private array $extensions;
+
 	/**
 	 * @param array<string> $extensions
 	 * @param class-string $class
@@ -46,6 +49,7 @@ final class ExtensionRequired extends LogicalException
 	private static function create(array $extensions, string $called): self
 	{
 		$self = new self();
+		$self->extensions = $extensions;
 
 		$extensionsInline = implode(', ', $extensions);
 		$required = count($extensions) > 1
@@ -77,6 +81,14 @@ final class ExtensionRequired extends LogicalException
 		return $ref->getMethod($function)->isStatic()
 			? '::'
 			: '->';
+	}
+
+	/**
+	 * @return array<string>
+	 */
+	public function getExtensions(): array
+	{
+		return $this->extensions;
 	}
 
 }

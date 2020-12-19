@@ -2,6 +2,7 @@
 
 namespace Tests\Orisai\Utils\Unit\Dependencies\Exception;
 
+use Generator;
 use Orisai\Utils\Dependencies\Exception\ExtensionRequired;
 use PHPUnit\Framework\TestCase;
 use Tests\Orisai\Utils\Doubles\TestClass;
@@ -100,6 +101,37 @@ Problem: Required php extension foo is not installed.
 MSG);
 
 		throw ExtensionRequired::forMethod(['foo'], TestClass::class, 'dynamicMethod');
+	}
+
+	/**
+	 * @dataProvider getterProvider
+	 */
+	public function testGetter(ExtensionRequired $exception): void
+	{
+		self::assertSame(
+			['foo', 'bar'],
+			$exception->getExtensions(),
+		);
+	}
+
+	/**
+	 * @return Generator<array<mixed>>
+	 */
+	public function getterProvider(): Generator
+	{
+		$extensions = ['foo', 'bar'];
+
+		yield [
+			ExtensionRequired::forClass($extensions, self::class),
+		];
+
+		yield [
+			ExtensionRequired::forMethod($extensions, self::class, __FUNCTION__),
+		];
+
+		yield [
+			ExtensionRequired::forFunction($extensions, __FUNCTION__),
+		];
 	}
 
 }

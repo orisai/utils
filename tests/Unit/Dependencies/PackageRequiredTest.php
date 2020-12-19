@@ -2,6 +2,7 @@
 
 namespace Tests\Orisai\Utils\Unit\Dependencies;
 
+use Generator;
 use Orisai\Utils\Dependencies\Exception\PackageRequired;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -172,6 +173,37 @@ Solution: Install with
 MSG);
 
 		throw PackageRequired::forClass(['orisai/coding-standard:^99.99.99'], self::class);
+	}
+
+	/**
+	 * @dataProvider getterProvider
+	 */
+	public function testGetter(PackageRequired $exception): void
+	{
+		self::assertSame(
+			['example/foo', 'example/bar'],
+			$exception->getPackages(),
+		);
+	}
+
+	/**
+	 * @return Generator<array<mixed>>
+	 */
+	public function getterProvider(): Generator
+	{
+		$packages = ['example/foo', 'example/bar'];
+
+		yield [
+			PackageRequired::forClass($packages, self::class),
+		];
+
+		yield [
+			PackageRequired::forMethod($packages, self::class, __FUNCTION__),
+		];
+
+		yield [
+			PackageRequired::forFunction($packages, __FUNCTION__),
+		];
 	}
 
 }
