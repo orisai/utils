@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Orisai\Utils\Unit\Dependencies;
+namespace Tests\Orisai\Utils\Unit\Dependencies\Exception;
 
 use Generator;
 use Orisai\Utils\Dependencies\Exception\PackageRequired;
@@ -29,7 +29,7 @@ MSG);
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use method
-         Tests\Orisai\Utils\Unit\Dependencies\PackageRequiredTest->testMethod().
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest->testMethod().
 Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
 Solution: Install with
           >>>composer require "orisai/coding-standard:^1.0.0"<<<
@@ -43,7 +43,7 @@ MSG);
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\PackageRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
 Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
 Solution: Install with
           >>>composer require "orisai/coding-standard:^1.0.0"<<<
@@ -57,7 +57,7 @@ MSG);
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\PackageRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
 Problem: Required packages orisai/non-existent, example/package are not
          installed.
 Solution: Install with
@@ -139,7 +139,7 @@ MSG);
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\PackageRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
 Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
 Solution: Install with
           >>>composer require "orisai/coding-standard:^1.0.0"<<<
@@ -166,7 +166,7 @@ MSG);
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
-         Tests\Orisai\Utils\Unit\Dependencies\PackageRequiredTest.
+         Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
 Problem: Required package "orisai/coding-standard:^99.99.99" is not installed.
 Solution: Install with
           >>>composer require "orisai/coding-standard:^99.99.99"<<<
