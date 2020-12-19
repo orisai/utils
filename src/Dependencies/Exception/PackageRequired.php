@@ -22,6 +22,9 @@ use const PHP_EOL;
 final class PackageRequired extends LogicalException
 {
 
+	/** @var array<string> */
+	private array $packages;
+
 	/**
 	 * @param array<string> $packages
 	 * @param class-string $class
@@ -77,6 +80,7 @@ final class PackageRequired extends LogicalException
 	private static function create(array $packages, string $called, $source): self
 	{
 		$self = new self();
+		$self->packages = $packages;
 
 		foreach ($packages as $key => $package) {
 			$split = explode(':', $package, 2);
@@ -160,6 +164,14 @@ final class PackageRequired extends LogicalException
 		return $ref->getMethod($function)->isStatic()
 			? '::'
 			: '->';
+	}
+
+	/**
+	 * @return array<string>
+	 */
+	public function getPackages(): array
+	{
+		return $this->packages;
 	}
 
 }
