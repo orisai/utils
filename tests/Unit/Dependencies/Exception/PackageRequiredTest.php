@@ -16,9 +16,9 @@ final class PackageRequiredTest extends TestCase
 		$this->expectException(PackageRequired::class);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use function Tests\Orisai\Utils\Doubles\testFunction().
-Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
+Problem: Required package "orisai/coding-standard:^2.0.0" is not installed.
 Solution: Install with
-          >>>composer require "orisai/coding-standard:^1.0.0
+          >>>composer require "orisai/coding-standard:^2.0.0
 MSG);
 
 		throw PackageRequired::forFunction(['orisai/coding-standard'], 'Tests\Orisai\Utils\Doubles\testFunction');
@@ -30,9 +30,9 @@ MSG);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use method
          Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest->testMethod().
-Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
+Problem: Required package "orisai/coding-standard:^2.0.0" is not installed.
 Solution: Install with
-          >>>composer require "orisai/coding-standard:^1.0.0"<<<
+          >>>composer require "orisai/coding-standard:^2.0.0"<<<
 MSG);
 
 		throw PackageRequired::forMethod(['orisai/coding-standard'], self::class, __FUNCTION__);
@@ -44,9 +44,9 @@ MSG);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
          Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
-Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
+Problem: Required package "orisai/coding-standard:^2.0.0" is not installed.
 Solution: Install with
-          >>>composer require "orisai/coding-standard:^1.0.0"<<<
+          >>>composer require "orisai/coding-standard:^2.0.0"<<<
 MSG);
 
 		throw PackageRequired::forClass(['orisai/coding-standard'], self::class);
@@ -140,9 +140,9 @@ MSG);
 		$this->expectExceptionMessage(<<<'MSG'
 Context: Trying to use class
          Tests\Orisai\Utils\Unit\Dependencies\Exception\PackageRequiredTest.
-Problem: Required package "orisai/coding-standard:^1.0.0" is not installed.
+Problem: Required package "orisai/coding-standard:^2.0.0" is not installed.
 Solution: Install with
-          >>>composer require "orisai/coding-standard:^1.0.0"<<<
+          >>>composer require "orisai/coding-standard:^2.0.0"<<<
 MSG);
 
 		throw PackageRequired::forUndefinedClass(['orisai/coding-standard'], self::class, __FILE__);
