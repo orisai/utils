@@ -13,6 +13,7 @@ final class ArrayMergerTest extends TestCase
 	 * @param array<mixed> $default
 	 * @param array<mixed> $toMerge
 	 * @param array<mixed> $expected
+	 *
 	 * @dataProvider provideTest
 	 */
 	public function test(array $default, array $toMerge, array $expected): void
