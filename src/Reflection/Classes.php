@@ -4,6 +4,7 @@ namespace Orisai\Utils\Reflection;
 
 use ReflectionClass;
 use function array_pop;
+use function array_values;
 use function class_parents;
 use function dirname;
 use function explode;
@@ -13,11 +14,11 @@ final class Classes
 
 	/**
 	 * @param class-string $class
-	 * @return array<class-string>
+	 * @return array<int, class-string>
 	 */
 	public static function getClassList(string $class): array
 	{
-		return [$class] + class_parents($class);
+		return array_values([$class] + class_parents($class));
 	}
 
 	/**
