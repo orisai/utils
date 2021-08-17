@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Orisai\Utils\Unit\Tester;
+namespace Tests\Orisai\Utils\Unit\Dependencies;
 
-use Orisai\Utils\Tester\DependenciesTester;
+use Orisai\Utils\Dependencies\DependenciesTester;
 use PHPUnit\Framework\TestCase;
 
 /**

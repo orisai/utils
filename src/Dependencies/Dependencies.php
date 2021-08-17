@@ -3,7 +3,6 @@
 namespace Orisai\Utils\Dependencies;
 
 use Composer\InstalledVersions;
-use Orisai\Utils\Tester\DependenciesTester;
 use function extension_loaded;
 
 final class Dependencies

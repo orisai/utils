@@ -3,7 +3,7 @@
 namespace Tests\Orisai\Utils\Unit\Dependencies;
 
 use Orisai\Utils\Dependencies\Dependencies;
-use Orisai\Utils\Tester\DependenciesTester;
+use Orisai\Utils\Dependencies\DependenciesTester;
 use PHPUnit\Framework\TestCase;
 
 final class DependenciesTest extends TestCase

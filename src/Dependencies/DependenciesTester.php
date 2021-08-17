@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Orisai\Utils\Tester;
+namespace Orisai\Utils\Dependencies;
 
 use function array_flip;
 use function array_key_exists;

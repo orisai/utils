@@ -93,7 +93,7 @@ Testing extensions:
 
 ```php
 use Orisai\Utils\Dependencies\Dependencies;
-use Orisai\Utils\Tester\DependenciesTester;
+use Orisai\Utils\Dependencies\DependenciesTester;
 
 DependenciesTester::addIgnoredExtensions(['curl']);
 
@@ -105,7 +105,7 @@ Testing packages:
 
 ```php
 use Orisai\Utils\Dependencies\Dependencies;
-use Orisai\Utils\Tester\DependenciesTester;
+use Orisai\Utils\Dependencies\DependenciesTester;
 
 DependenciesTester::addIgnoredPackages(['example/package']);
 
