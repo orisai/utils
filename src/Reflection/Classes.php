@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Orisai\Utils;
+namespace Orisai\Utils\Reflection;
 
 use ReflectionClass;
 use function array_pop;
