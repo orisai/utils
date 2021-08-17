@@ -4,8 +4,7 @@ namespace Orisai\Utils\Dependencies\Exception;
 
 use Orisai\Exceptions\LogicalException;
 use Orisai\Exceptions\Message;
-use ReflectionClass;
-use function class_exists;
+use Orisai\Utils\Reflection\Classes;
 use function count;
 use function implode;
 
@@ -30,7 +29,7 @@ final class ExtensionRequired extends LogicalException
 	 */
 	public static function forMethod(array $extensions, string $class, string $function): self
 	{
-		$operator = self::getMethodOperator($class, $function);
+		$operator = Classes::getMethodOperator($class, $function);
 
 		return self::create($extensions, "method {$class}{$operator}{$function}()");
 	}
@@ -62,25 +61,6 @@ final class ExtensionRequired extends LogicalException
 		$self->withMessage($message);
 
 		return $self;
-	}
-
-	/**
-	 * @param class-string $class
-	 */
-	private static function getMethodOperator(string $class, string $function): string
-	{
-		if (!class_exists($class)) {
-			return '::';
-		}
-
-		$ref = new ReflectionClass($class);
-		if (!$ref->hasMethod($function)) {
-			return '::';
-		}
-
-		return $ref->getMethod($function)->isStatic()
-			? '::'
-			: '->';
 	}
 
 	/**

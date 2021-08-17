@@ -4,6 +4,7 @@ namespace Orisai\Utils\Dependencies\Exception;
 
 use Orisai\Exceptions\LogicalException;
 use Orisai\Exceptions\Message;
+use Orisai\Utils\Reflection\Classes;
 use ReflectionClass;
 use ReflectionFunction;
 use function class_exists;
@@ -44,7 +45,7 @@ final class PackageRequired extends LogicalException
 	 */
 	public static function forMethod(array $packages, string $class, string $function): self
 	{
-		$operator = self::getMethodOperator($class, $function);
+		$operator = Classes::getMethodOperator($class, $function);
 
 		return self::create(
 			$packages,
@@ -145,25 +146,6 @@ final class PackageRequired extends LogicalException
 		}
 
 		return [];
-	}
-
-	/**
-	 * @param class-string $class
-	 */
-	private static function getMethodOperator(string $class, string $function): string
-	{
-		if (!class_exists($class)) {
-			return '::';
-		}
-
-		$ref = new ReflectionClass($class);
-		if (!$ref->hasMethod($function)) {
-			return '::';
-		}
-
-		return $ref->getMethod($function)->isStatic()
-			? '::'
-			: '->';
 	}
 
 	/**

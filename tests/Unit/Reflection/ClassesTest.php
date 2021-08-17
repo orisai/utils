@@ -10,6 +10,9 @@ use Orisai\Utils\Dependencies\Exception\ExtensionRequired;
 use Orisai\Utils\Reflection\Classes;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Tests\Orisai\Utils\Doubles\TestClass;
+use function assert;
+use function method_exists;
 
 final class ClassesTest extends TestCase
 {
@@ -87,6 +90,50 @@ final class ClassesTest extends TestCase
 		yield [
 			Classes::class,
 			'Classes',
+		];
+	}
+
+	/**
+	 * @param class-string $class
+	 *
+	 * @dataProvider provideMethodOperator
+	 */
+	public function testMethodOperator(string $class, string $function, string $operator): void
+	{
+		self::assertSame(
+			$operator,
+			Classes::getMethodOperator($class, $function),
+		);
+	}
+
+	public function provideMethodOperator(): Generator
+	{
+		yield [
+			'non-existent',
+			'non-existent',
+			'::',
+		];
+
+		yield [
+			Classes::class,
+			'non-existent',
+			'::',
+		];
+
+		assert(method_exists(TestClass::class, 'staticMethod'));
+
+		yield [
+			TestClass::class,
+			'staticMethod',
+			'::',
+		];
+
+		assert(method_exists(TestClass::class, 'dynamicMethod'));
+
+		yield [
+			TestClass::class,
+			'dynamicMethod',
+			'->',
 		];
 	}
 

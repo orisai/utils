@@ -5,6 +5,7 @@ namespace Orisai\Utils\Reflection;
 use ReflectionClass;
 use function array_pop;
 use function array_values;
+use function class_exists;
 use function class_parents;
 use function dirname;
 use function explode;
@@ -36,6 +37,26 @@ final class Classes
 		$parts = explode('\\', $class);
 
 		return array_pop($parts);
+	}
+
+	/**
+	 * @param class-string $class
+	 * @phpstan-return '::'|'->'
+	 */
+	public static function getMethodOperator(string $class, string $function): string
+	{
+		if (!class_exists($class)) {
+			return '::';
+		}
+
+		$ref = new ReflectionClass($class);
+		if (!$ref->hasMethod($function)) {
+			return '::';
+		}
+
+		return $ref->getMethod($function)->isStatic()
+			? '::'
+			: '->';
 	}
 
 }

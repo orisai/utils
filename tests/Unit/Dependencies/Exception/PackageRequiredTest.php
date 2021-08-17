@@ -6,7 +6,6 @@ use Generator;
 use Orisai\Utils\Dependencies\Exception\PackageRequired;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Tests\Orisai\Utils\Doubles\TestClass;
 
 final class PackageRequiredTest extends TestCase
 {
@@ -78,60 +77,6 @@ Solution: Install with
 MSG);
 
 		throw PackageRequired::forClass(['orisai/non-existent'], ReflectionClass::class);
-	}
-
-	public function testUndefinedClass(): void
-	{
-		$this->expectException(PackageRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method NonExistent::undefined().
-Problem: Required package orisai/non-existent is not installed.
-Solution: Install with
-          >>>composer require orisai/non-existent<<<
-MSG);
-
-		throw PackageRequired::forMethod(['orisai/non-existent'], 'NonExistent', 'undefined');
-	}
-
-	public function testUndefinedMethod(): void
-	{
-		$this->expectException(PackageRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method Tests\Orisai\Utils\Doubles\TestClass::undefined().
-Problem: Required package orisai/non-existent is not installed.
-Solution: Install with
-          >>>composer require orisai/non-existent<<<
-MSG);
-
-		throw PackageRequired::forMethod(['orisai/non-existent'], TestClass::class, 'undefined');
-	}
-
-	public function testStaticMethod(): void
-	{
-		$this->expectException(PackageRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method
-         Tests\Orisai\Utils\Doubles\TestClass::staticMethod().
-Problem: Required package orisai/non-existent is not installed.
-Solution: Install with
-          >>>composer require orisai/non-existent<<<
-MSG);
-
-		throw PackageRequired::forMethod(['orisai/non-existent'], TestClass::class, 'staticMethod');
-	}
-
-	public function testDynamicMethod(): void
-	{
-		$this->expectException(PackageRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method
-         Tests\Orisai\Utils\Doubles\TestClass->dynamicMethod().
-Problem: Required package orisai/non-existent is not installed.
-Solution: Install with
-          >>>composer require orisai/non-existent<<<
-MSG);
-
-		throw PackageRequired::forMethod(['orisai/non-existent'], TestClass::class, 'dynamicMethod');
 	}
 
 	public function testPathOfUndefinedClass(): void

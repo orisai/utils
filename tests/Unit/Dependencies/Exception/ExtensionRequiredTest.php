@@ -5,7 +5,6 @@ namespace Tests\Orisai\Utils\Unit\Dependencies\Exception;
 use Generator;
 use Orisai\Utils\Dependencies\Exception\ExtensionRequired;
 use PHPUnit\Framework\TestCase;
-use Tests\Orisai\Utils\Doubles\TestClass;
 
 final class ExtensionRequiredTest extends TestCase
 {
@@ -55,52 +54,6 @@ Problem: Required php extensions foo, bar are not installed.
 MSG);
 
 		throw ExtensionRequired::forClass(['foo', 'bar'], self::class);
-	}
-
-	public function testUndefinedClass(): void
-	{
-		$this->expectException(ExtensionRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method NonExistent::undefined().
-Problem: Required php extension foo is not installed.
-MSG);
-
-		throw ExtensionRequired::forMethod(['foo'], 'NonExistent', 'undefined');
-	}
-
-	public function testUndefinedMethod(): void
-	{
-		$this->expectException(ExtensionRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method Tests\Orisai\Utils\Doubles\TestClass::undefined().
-Problem: Required php extension foo is not installed.
-MSG);
-
-		throw ExtensionRequired::forMethod(['foo'], TestClass::class, 'undefined');
-	}
-
-	public function testStaticMethod(): void
-	{
-		$this->expectException(ExtensionRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method
-         Tests\Orisai\Utils\Doubles\TestClass::staticMethod().
-Problem: Required php extension foo is not installed.
-MSG);
-
-		throw ExtensionRequired::forMethod(['foo'], TestClass::class, 'staticMethod');
-	}
-
-	public function testDynamicMethod(): void
-	{
-		$this->expectException(ExtensionRequired::class);
-		$this->expectExceptionMessage(<<<'MSG'
-Context: Trying to use method
-         Tests\Orisai\Utils\Doubles\TestClass->dynamicMethod().
-Problem: Required php extension foo is not installed.
-MSG);
-
-		throw ExtensionRequired::forMethod(['foo'], TestClass::class, 'dynamicMethod');
 	}
 
 	/**
