@@ -57,7 +57,7 @@ MSG);
 	}
 
 	/**
-	 * @dataProvider getterProvider
+	 * @dataProvider provideGetter
 	 */
 	public function testGetter(ExtensionRequired $exception): void
 	{
@@ -70,7 +70,7 @@ MSG);
 	/**
 	 * @return Generator<array<mixed>>
 	 */
-	public function getterProvider(): Generator
+	public function provideGetter(): Generator
 	{
 		$extensions = ['foo', 'bar'];
 

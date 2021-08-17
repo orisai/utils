@@ -121,7 +121,7 @@ MSG);
 	}
 
 	/**
-	 * @dataProvider getterProvider
+	 * @dataProvider provideGetter
 	 */
 	public function testGetter(PackageRequired $exception): void
 	{
@@ -134,7 +134,7 @@ MSG);
 	/**
 	 * @return Generator<array<mixed>>
 	 */
-	public function getterProvider(): Generator
+	public function provideGetter(): Generator
 	{
 		$packages = ['example/foo', 'example/bar'];
 
