@@ -89,7 +89,7 @@ final class PackageRequired extends LogicalException
 			$packageVersion = $split[1] ?? self::getPackageVersion($packageName, $source);
 
 			if ($packageVersion !== null) {
-				$packages[$key] = "\"{$packageName}:{$packageVersion}\"";
+				$packages[$key] = "{$packageName}:{$packageVersion}";
 			}
 		}
 
@@ -145,7 +145,10 @@ final class PackageRequired extends LogicalException
 			return self::getComposerJsonContent($parentPath);
 		}
 
+		// Class existing in filesystem with no composer.json above
+		// @codeCoverageIgnoreStart
 		return [];
+		// @codeCoverageIgnoreEnd
 	}
 
 	/**

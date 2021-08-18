@@ -4,8 +4,7 @@ namespace Orisai\Utils\Dependencies;
 
 use function array_flip;
 use function array_key_exists;
-use function array_merge;
-use function array_values;
+use function array_keys;
 
 final class DependenciesTester
 {
@@ -21,10 +20,7 @@ final class DependenciesTester
 	 */
 	public static function addIgnoredPackages(array $packages): void
 	{
-		self::$ignoredPackages = array_merge(
-			self::$ignoredPackages,
-			array_flip(array_values($packages)),
-		);
+		self::$ignoredPackages += array_flip($packages);
 	}
 
 	public static function shouldPackageBeIgnored(string $package): bool
@@ -33,19 +29,32 @@ final class DependenciesTester
 	}
 
 	/**
+	 * @return array<string>
+	 */
+	public static function getIgnoredPackages(): array
+	{
+		return array_keys(self::$ignoredPackages);
+	}
+
+	/**
 	 * @param array<string> $extensions
 	 */
 	public static function addIgnoredExtensions(array $extensions): void
 	{
-		self::$ignoredExtensions = array_merge(
-			self::$ignoredExtensions,
-			array_flip(array_values($extensions)),
-		);
+		self::$ignoredExtensions += array_flip($extensions);
 	}
 
 	public static function shouldExtensionBeIgnored(string $extension): bool
 	{
 		return array_key_exists($extension, self::$ignoredExtensions);
+	}
+
+	/**
+	 * @return array<string>
+	 */
+	public static function getIgnoredExtensions(): array
+	{
+		return array_keys(self::$ignoredExtensions);
 	}
 
 }
