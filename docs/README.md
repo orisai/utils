@@ -10,6 +10,7 @@ Utility classes used across Orisai libraries
 	- [Testing optionals](#testing-optionals)
 - [Arrays](#arrays)
 	- [Merge arrays](#merge-arrays)
+- [Reflection](#reflection)
 
 ## Optional dependencies
 
@@ -160,4 +161,69 @@ $expected = [
 ];
 
 assert($result === $expected);
+```
+
+## Reflection
+
+Shortcut functions wrapping behavior of php `Reflector` classes
+
+- Use these shortcuts just for single-time reflection uses. For more intensive reflection use cases always use built-in
+  Reflector classes.
+
+Get list of classes of parent classes, including actual class
+
+```php
+use Orisai\Utils\Reflection\Classes;
+
+$classList = Classes::getClassList(LogicException::class);
+
+// $classList
+[
+	LogicException::class,
+	Exception::class,
+];
+```
+
+Get class directory
+
+```php
+use Orisai\Exceptions\DomainException;
+use Orisai\Utils\Reflection\Classes;
+
+$classDir = Classes::getClassDir(DomainException::class);
+
+// $classDir
+'/path/to/vendor/orisai/exceptions';
+```
+
+Get class name without namespace
+
+```php
+use Orisai\Exceptions\DomainException;
+use Orisai\Utils\Reflection\Classes;
+
+$classShortName = Classes::getShortName(DomainException::class);
+
+// $classShortName
+'DomainException';
+```
+
+Get method operator
+
+```php
+use Orisai\Utils\Reflection\Classes;
+
+$operator = Classes::getMethodOperator(Example::class, 'staticMethod');
+
+// $operator
+'::';
+```
+
+```php
+use Orisai\Utils\Reflection\Classes;
+
+$operator = Classes::getMethodOperator(Example::class, 'objectMethod');
+
+// $operator
+'->';
 ```
