@@ -9,6 +9,8 @@ use function class_exists;
 use function class_parents;
 use function dirname;
 use function explode;
+use function str_replace;
+use const DIRECTORY_SEPARATOR;
 
 final class Classes
 {
@@ -29,7 +31,13 @@ final class Classes
 	{
 		$reflection = new ReflectionClass($class);
 
-		return dirname($reflection->getFileName());
+		$dir = dirname($reflection->getFileName());
+
+		if (DIRECTORY_SEPARATOR !== '/') {
+			return str_replace(DIRECTORY_SEPARATOR, '/', $dir);
+		}
+
+		return $dir;
 	}
 
 	public static function getShortName(string $class): string
