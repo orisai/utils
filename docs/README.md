@@ -5,16 +5,16 @@ Utility classes used across Orisai libraries
 ## Content
 
 - [Optional dependencies](#optional-dependencies)
-    - [Optional extension](#optional-extension)
-    - [Optional package](#optional-package)
+	- [Optional extension](#optional-extension)
+	- [Optional package](#optional-package)
 	- [Testing optionals](#testing-optionals)
 - [Arrays](#arrays)
-    - [Merge arrays](#merge-arrays)
+	- [Merge arrays](#merge-arrays)
 
 ## Optional dependencies
 
-Sometimes it's useful to have dependency required only by specific class, method or function.
-In that case we should check whether the dependency is installed.
+Sometimes it's useful to have dependency required only by specific class, method or function. In that case we should
+check whether the dependency is installed.
 
 ### Optional extension
 
@@ -84,7 +84,8 @@ if (Dependencies::isPackageLoaded('example/package')) {
 
 ### Testing optionals
 
-For testing, you can emulate extension and packages are not loaded instead of having not tested code branches or complicated CI.
+For testing, you can emulate extension and packages are not loaded instead of having not tested code branches or
+complicated CI.
 
 Just make sure your optionals tests run in separate processes to prevent race conditions from parallel tests running.
 e.g. with [PHPUnit](https://github.com/sebastianbergmann/phpunit) `@runInSeparateProcess` annotation.
@@ -116,6 +117,13 @@ Dependencies::isPackageLoaded('example/package'); // false
 ## Arrays
 
 ### Merge arrays
+
+Intuitive merging
+
+- merging arrays recursively
+- preferring non-default values in case of collision
+- overriding string keys
+- adding numeric keys on the end of array
 
 ```php
 use Orisai\Utils\Arrays\ArrayMerger;

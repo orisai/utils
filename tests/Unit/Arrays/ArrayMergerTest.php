@@ -77,6 +77,30 @@ final class ArrayMergerTest extends TestCase
 				7 => 'three default',
 			],
 		];
+
+		yield 'type-mismatch' => [
+			[
+				'key' => 'default',
+			],
+			[
+				'key' => ['override'],
+			],
+			[
+				'key' => ['override'],
+			],
+		];
+
+		yield 'type-mismatch-2' => [
+			[
+				'key' => ['default'],
+			],
+			[
+				'key' => 'override',
+			],
+			[
+				'key' => 'override',
+			],
+		];
 	}
 
 }

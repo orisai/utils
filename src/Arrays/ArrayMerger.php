@@ -15,37 +15,23 @@ final class ArrayMerger
 	 */
 	public static function merge(array $default, array $toMerge): array
 	{
-		foreach ($toMerge as $key => $val) {
+		foreach ($toMerge as $key => $value) {
 			if (is_int($key)) {
-				$default[] = $val;
+				$default[] = $value;
 			} else {
 				if (isset($default[$key])) {
-					$val = self::mergeInternal($default[$key], $val);
+					$defaultValue = $default[$key];
+
+					if (is_array($defaultValue) && is_array($value)) {
+						$value = self::merge($defaultValue, $value);
+					}
 				}
 
-				$default[$key] = $val;
+				$default[$key] = $value;
 			}
 		}
 
 		return $default;
-	}
-
-	/**
-	 * @param mixed $default
-	 * @param mixed $toMerge
-	 * @return mixed
-	 */
-	private static function mergeInternal($default, $toMerge)
-	{
-		if (is_array($toMerge) && is_array($default)) {
-			return self::merge($default, $toMerge);
-		}
-
-		if ($toMerge === null && is_array($default)) {
-			return $default;
-		}
-
-		return $toMerge;
 	}
 
 }
