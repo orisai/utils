@@ -4,6 +4,7 @@ Utility classes used across Orisai libraries
 
 ## Content
 
+- [Setup](#setup)
 - [Optional dependencies](#optional-dependencies)
 	- [Optional extension](#optional-extension)
 	- [Optional package](#optional-package)
@@ -11,6 +12,14 @@ Utility classes used across Orisai libraries
 - [Arrays](#arrays)
 	- [Merge arrays](#merge-arrays)
 - [Reflection](#reflection)
+
+## Setup
+
+Install with [Composer](https://getcomposer.org)
+
+```sh
+composer require orisai/utils
+```
 
 ## Optional dependencies
 
