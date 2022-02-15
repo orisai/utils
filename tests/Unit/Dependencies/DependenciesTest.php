@@ -46,7 +46,6 @@ final class DependenciesTest extends TestCase
 		self::assertTrue(Dependencies::isExtensionLoaded('date'));
 		self::assertFalse(Dependencies::isExtensionLoaded('foo'));
 		self::assertFalse(Dependencies::isExtensionLoaded('bar'));
-
 	}
 
 	/**
