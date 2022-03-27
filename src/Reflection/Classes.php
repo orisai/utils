@@ -16,8 +16,9 @@ final class Classes
 {
 
 	/**
-	 * @param class-string $class
-	 * @return array<int, class-string>
+	 * @template T
+	 * @param class-string<T> $class
+	 * @return array<int, class-string<T>>
 	 */
 	public static function getClassList(string $class): array
 	{
