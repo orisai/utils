@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/orisai/utils/compare/1.0.0...HEAD)
 
+- Composer
+	- allows PHP 8.2
+
 ### Added
 
 - `Classes`
