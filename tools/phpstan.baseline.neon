@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to function method_exists\\(\\) with 'Tests\\\\\\\\Orisai\\\\\\\\Utils\\\\\\\\Doubles\\\\\\\\TestClass' and 'staticMethod' will always evaluate to true\\.$#"
+			count: 1
+			path: ../tests/Unit/Reflection/ClassesTest.php
