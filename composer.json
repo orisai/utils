@@ -15,7 +15,7 @@
 		}
 	],
 	"require": {
-		"php": "7.4 - 8.3",
+		"php": "7.4 - 8.4",
 		"ext-json": "*",
 		"composer-runtime-api": "^2.0.0",
 		"orisai/exceptions": "^1.0.0"
